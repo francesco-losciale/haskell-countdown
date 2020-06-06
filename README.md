@@ -13,5 +13,16 @@ addition, subtraction, multiplication, division and parentheses.
 Please checkout [here](https://github.com/francesco-losciale/haskell-countdown/tags) all the tagged versions.
 Below some descriptions
 
-Version 1 - Implements brute force to generate all the possible expressions. The `valid` function is 
-called only after the expression has been generated, when is being evaluated in the function `eval`.
+### Tag countdown-version-1
+Implements brute force to generate all the possible expressions. The `valid` function to check
+ that the operator can be applied to the numbers is called only after the expression has been generated, 
+ inside the function `eval`.
+
+### Tag countdown-version-2 
+Same solution as before, with improved performance. The `eval` function is not used anymore. 
+The `combine'` function now is constructing the expression only if the operator is valid on x and y.
+While in version-1 we first constructed all the expression, and then we checked in `eval` whether
+they had a valid operator or not. 
+
+Version-2 constructs way less expressions, since the validation at an earlier stage. All the expressions 
+that would have failed the validation are not constructed.
