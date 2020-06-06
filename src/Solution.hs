@@ -23,3 +23,8 @@ solutions ns n = [e | ns' <- choices ns, e <- exprs ns', eval e == [n]]
 -- same as previous version, the validation of the operation has been moved at the moment of the
 -- construction of the expression, in the combine' function
 solutions' ns n = [e | ns' <- choices ns, (e,m) <- results ns', m == n]
+
+
+-- same as previous version, results'' relies on valid'', which exploits algebraic properties to improve
+-- performance
+solutions'' ns n = [e | ns' <- choices ns, (e,m) <- results'' ns', m == n]
