@@ -30,6 +30,8 @@ library
       Combinations
       Expr
       Solution
+      Result
+      Utils
   other-modules:
       Paths_haskell_countdown
   hs-source-dirs:
