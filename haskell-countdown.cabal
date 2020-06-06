@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fca0723d34baf4bc995122872902b9010fb3677e20e39135cde4f3dd70700032
+-- hash: dc63d3412826d1909c8da2516955cd7e2041e7a1473e8f194ffb6d805545e7bc
 
 name:           haskell-countdown
 version:        0.1.0.0
@@ -39,8 +39,21 @@ library
   default-language: Haskell2010
 
 executable haskell-countdown-exe
+  main-is: Countdown.hs
+  other-modules:
+      Paths_haskell_countdown
+  hs-source-dirs:
+      app
+  ghc-options: -O2 -threaded -rtsopts -with-rtsopts=-N -main-is Countdown
+  build-depends:
+      base >=4.7 && <5
+    , haskell-countdown
+  default-language: Haskell2010
+
+executable haskell-main-exe
   main-is: Main.hs
   other-modules:
+      Countdown
       Paths_haskell_countdown
   hs-source-dirs:
       app
