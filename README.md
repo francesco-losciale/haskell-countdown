@@ -26,3 +26,33 @@ they had a valid operator or not.
 
 Version-2 constructs way less expressions, since the validation at an earlier stage. All the expressions 
 that would have failed the validation are not constructed.
+
+### Tag countdown-version-3
+
+We can exploit algebraic properties to improve the performance of our solution.
+That are: 
+- x + y = y + x
+- x * y = y * x
+- x * 1 = x
+- 1 * y = y
+- x / 1 = x
+
+We could then refine the `valid` function from this version:
+```haskell
+valid :: Op -> Int -> Int -> Bool
+valid Add _ _ = True
+valid Sub x y = x > y
+valid Mul _ _ = True
+valid Div x y = x `mod` y == 0
+```
+
+To this one
+```haskell
+valid :: Op -> Int -> Int -> Bool
+valid Add _ _ = x <= y
+valid Sub x y = x > y
+valid Mul _ _ = x /= 1 && y /= 1 && x <= y
+valid Div x y = y /= 1 && x `mod` y == 0
+```
+
+We reduced the number of cases on the basis of which we construct expressions to be evaluated.
