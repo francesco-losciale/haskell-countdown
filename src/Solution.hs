@@ -4,7 +4,8 @@ import Expr
 import Combinations
 
 -- given a list of numbers and a target number, check if an expression in input is a valid solution,
--- 1. check that the numbers used in the expressions as a list are contained in all the possible choices of the numbers given in input
+-- 1. check that the numbers used in the expressions as a list are contained in all
+--      the possible choices of the numbers given in input
 -- 2. check the result of eval against the target
 solution :: Expr -> [Int] -> Int -> Bool
 solution expr numbers target = elem (values expr) (choices numbers) && eval expr == [target]
@@ -12,7 +13,8 @@ solution expr numbers target = elem (values expr) (choices numbers) && eval expr
 
 --brute force solution
 
--- given a list, returns all possible ways to split the list in two so that appending the result would return the original list, preserving the order
+-- given a list, returns all possible ways to split the list in two so that appending the
+-- result would return the original list, preserving the order
 split :: [a] -> [([a],[a])]
 split [] = []
 split [_] = []

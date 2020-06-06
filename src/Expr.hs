@@ -31,10 +31,12 @@ instance Show Expr where
                                 brak (Val n) = show n
                                 brak expr    = "(" ++ show expr ++ ")"
 
+-- given an expression, returns all the numbers used in it
 values :: Expr -> [Int]
 values (Val n) = [n]
 values (App _ left right) = values left ++ values right
 
+-- given an expression, evaluate it and return the result
 eval :: Expr -> [Int]
 eval (Val n) = [n | n > 0]
 eval (App op left right) = [apply op x y | x <- eval left,
