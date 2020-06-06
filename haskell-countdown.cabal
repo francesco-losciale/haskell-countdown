@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 0ebe2cc98ed651cc183e3da589035d4730e0063a22ef7b1904a55be42ae9a7aa
+-- hash: fca0723d34baf4bc995122872902b9010fb3677e20e39135cde4f3dd70700032
 
 name:           haskell-countdown
 version:        0.1.0.0
@@ -27,7 +27,9 @@ source-repository head
 
 library
   exposed-modules:
-      Lib
+      Combinations
+      Expr
+      Solution
   other-modules:
       Paths_haskell_countdown
   hs-source-dirs:

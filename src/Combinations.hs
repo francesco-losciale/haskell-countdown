@@ -12,7 +12,7 @@ interleave :: a -> [a] -> [[a]]
 interleave x [] = [[x]]
 interleave x (y:ys) = (x:y:ys) : map (y:) (interleave x ys)
 
--- returns all permutation of a list, which are given by all possible reorderings of the elements
+-- returns all permutation of a list, which are given by all possible reordering of the elements
 perms :: [a] -> [[a]]
 perms [] = [[]]
 perms (x:xs) = concat (map (interleave x) (perms xs))
