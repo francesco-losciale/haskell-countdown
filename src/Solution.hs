@@ -1,7 +1,9 @@
 module Solution where
 
+import Utils
 import Expr
 import Combinations
+import Result
 
 -- given a list of numbers and a target number, check if an expression in input is a valid solution,
 -- 1. check that the numbers used in the expressions as a list are contained in all
@@ -11,53 +13,13 @@ solution :: Expr -> [Int] -> Int -> Bool
 solution expr numbers target = elem (values expr) (choices numbers) && eval expr == [target]
 
 
---brute force solution
-
--- given a list, returns all possible ways to split the list in two so that appending the
--- result would return the original list, preserving the order
-split :: [a] -> [([a],[a])]
-split [] = []
-split [_] = []
-split (x:xs) = ([x],xs) : [(x:ls,rs) | (ls,rs) <- split xs]
--- split [1,2,3] = ([x],xs) : [(x:ls,rs) | (ls,rs) <- split xs]
--- split 1:[2,3] = ([x],xs) : [(x:ls,rs) | (ls,rs) <- split xs]
--- split 1:[2,3] = ([1],[2,3]) : [(1:ls,rs) | (ls,rs) <- split [2,3]]
--- split [2,3] = ([x],xs) : [(x:ls,rs) | (ls,rs) <- split xs]
--- split 2:[3] = ([2],xs) : [(2:ls,rs) | (ls,rs) <- split [3]]
--- split 2:[3] = ([2],xs) : [(2:ls,rs) | (ls,rs) <- []]
--- split 2:[3] = ([2],xs) : []
--- split 2:[3] = ([2],[3]) : []
--- split 2:[3] = [([2],[3])]
--- split 1:[2,3] = ([1],[2,3]) : [(1:ls,rs) | (ls,rs) <- split [2,3]]
--- split 1:[2,3] = ([1],[2,3]) : [(1:ls,rs) | (ls,rs) <- [([2],[3])]]
--- split 1:[2,3] = ([1],[2,3]) : [(1:[2],[3]) | ([2],[3]) <- [([2],[3])]]
--- split 1:[2,3] = ([1],[2,3]) : [(1:[2],[3])]
--- split 1:[2,3] = ([1],[2,3]) : [([1,2],[3])]
--- split 1:[2,3] = [([1],[2,3]),([1,2],[3])]
--- split [1,2,3] = [([1],[2,3]),([1,2],[3])]
-
-
--- returns all possible expressions that can be combined starting from the list of Int in input
-exprs :: [Int] -> [Expr]
-exprs [] = []
-exprs [n] = [Val n]
-exprs ns = [e | (ls,rs) <- split ns, l <- exprs ls, r <- exprs rs, e <- combine l r]
--- exprs [1,2] = [e | (ls,rs) <- split ns, l <- exprs ls, r <- exprs rs, e <- combine l r]
--- exprs [1,2] = [e | (ls,rs) <- split [1,2], l <- exprs ls, r <- exprs rs, e <- combine l r]
--- exprs [1,2] = [e | ([1],[2]) <- split [1,2], l <- exprs ls, r <- exprs rs, e <- combine l r]
--- exprs [1,2] = [e | ([1],[2]) <- split [1,2], l <- exprs [1], r <- exprs [2], e <- combine l r]
--- exprs [1,2] = [e | e <- combine (Val 1) (Val 2)]
--- exprs [1,2] = [1+2,1-2,1*2,1/2]
-
--- auxiliary function to combine all possible four operators of the pair expressions
-combine :: Expr -> Expr -> [Expr]
-combine l r = [App o l r | o <- ops]
-
-ops :: [Op]
-ops = [Add,Sub,Mul,Div]
-
 -- all possible expressions that solve an instance of the countdown problem, by first generating
 -- all expressions over each choice from the given list of numbers, and then selecting
 -- those expressions that successfully evaluate to give the target
 solutions :: [Int] -> Int -> [Expr]
 solutions ns n = [e | ns' <- choices ns, e <- exprs ns', eval e == [n]]
+
+
+-- same as previous version, the validation of the operation has been moved at the moment of the
+-- construction of the expression, in the combine' function
+solutions' ns n = [e | ns' <- choices ns, (e,m) <- results ns', m == n]
