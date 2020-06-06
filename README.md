@@ -13,4 +13,5 @@ addition, subtraction, multiplication, division and parentheses.
 Please checkout [here](https://github.com/francesco-losciale/haskell-countdown/tags) all the tagged versions.
 Below some descriptions
 
-Version 1 - uses bruteforce to generate all the possible expressions
+Version 1 - Implements brute force to generate all the possible expressions. The `valid` function is 
+called only after the expression has been generated, when is being evaluated in the function `eval`.
