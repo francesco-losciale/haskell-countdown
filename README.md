@@ -2,6 +2,16 @@
 
 Programming in Haskell, p.111, Graham Hutton, 2nd Edition Cambridge
 
+### How to run
+
+```shell script
+stack clean
+stack build
+stack test
+stack exec haskell-countdown-exe
+```
+
+
 ### Problem
 
 Given a sequence of numbers and a target number, attempt to construct an expression 
