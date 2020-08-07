@@ -1,6 +1,7 @@
 # Countdown problem
 
-Programming in Haskell, p.111, Graham Hutton, 2nd Edition Cambridge
+Programming in Haskell, p.111, Graham Hutton, 2nd Edition Cambridge. Example of how 
+algebraic properties can be used to improve performance.
 
 ### How to run
 
